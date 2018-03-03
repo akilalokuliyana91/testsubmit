@@ -16,19 +16,24 @@ namespace TestProject.Controllers
 {
     public class CustomersController : ApiController
     {
-        private TestProjectContext db = new TestProjectContext();
+        // private TestProjectContext db = new TestProjectContext();
+        private ICustomerRepository iCustomerRepository;
 
+        public CustomersController(ICustomerRepository iCustomerRepository)
+        {
+            this.iCustomerRepository = iCustomerRepository;
+        }
         // GET: api/Customers
         public IQueryable<Customer> GetCustomers()
         {
-            return db.Customers;
+            return iCustomerRepository.GetCustomers();
         }
 
         // GET: api/Customers/5
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> GetCustomer(int id)
         {
-            Customer customer = await db.Customers.FindAsync(id);
+            Customer customer = await iCustomerRepository.GetCustomerById(id);
             if (customer == null)
             {
                 return NotFound();
@@ -51,23 +56,7 @@ namespace TestProject.Controllers
                 return BadRequest();
             }
 
-            db.Entry(customer).State = EntityState.Modified;
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await iCustomerRepository.UpadateCustomer(customer);
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -81,8 +70,8 @@ namespace TestProject.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Customers.Add(customer);
-            await db.SaveChangesAsync();
+
+            await iCustomerRepository.InsertCustomers(customer);
 
             return CreatedAtRoute("DefaultApi", new { id = customer.Id }, customer);
         }
@@ -91,30 +80,14 @@ namespace TestProject.Controllers
         [ResponseType(typeof(Customer))]
         public async Task<IHttpActionResult> DeleteCustomer(int id)
         {
-            Customer customer = await db.Customers.FindAsync(id);
-            if (customer == null)
+            var updated=await iCustomerRepository.DeleteCustomers(id);
+            if (updated < 0)
             {
-                return NotFound();
+                return Ok(400);
             }
-
-            db.Customers.Remove(customer);
-            await db.SaveChangesAsync();
-
-            return Ok(customer);
+            return Ok(200);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool CustomerExists(int id)
-        {
-            return db.Customers.Count(e => e.Id == id) > 0;
-        }
+      
     }
 }
