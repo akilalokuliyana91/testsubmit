@@ -22,6 +22,8 @@ namespace TestProject
             container.RegisterType<TestProjectContext, TestProjectContext>(new HierarchicalLifetimeManager());
             container.RegisterType<ICustomerRepository, CustomerRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
+            config.EnableCors();
+
 
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.MapHttpAttributeRoutes();
