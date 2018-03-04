@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../../TestProject/Scripts/app",
+      "outDir": "../../TestProjectNetCore/wwwroot",
       "assets": [
         "assets",
         "favicon.ico"

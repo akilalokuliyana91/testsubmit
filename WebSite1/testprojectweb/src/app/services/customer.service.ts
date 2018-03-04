@@ -10,7 +10,7 @@ export class CustomerService {
   constructor(private http: Http) { }
 
   getCustomers(): Observable<Customer[]> {
-    let statusUrl= "http://localhost:5400/api/Customers";
+    let statusUrl= "http://localhost:55500/api/Customers";
     return this.http.get(statusUrl).map(res => {
       let stsRslt = res.json();
       return stsRslt || {};

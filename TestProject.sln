@@ -49,6 +49,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebSite2", "WebSite2\", "{C
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectNetCore", "TestProjectNetCore\TestProjectNetCore.csproj", "{6FA91E24-AA4E-4686-B543-A67B0C621812}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{C1B0191A-EA0A-46F7-8BBB-AB9EC6BEB022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1B0191A-EA0A-46F7-8BBB-AB9EC6BEB022}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{C1B0191A-EA0A-46F7-8BBB-AB9EC6BEB022}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{6FA91E24-AA4E-4686-B543-A67B0C621812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FA91E24-AA4E-4686-B543-A67B0C621812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FA91E24-AA4E-4686-B543-A67B0C621812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FA91E24-AA4E-4686-B543-A67B0C621812}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
