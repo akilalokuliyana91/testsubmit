@@ -1,5 +1,67 @@
-﻿@{
+﻿@*@{
     ViewBag.Title = "Index";
+}*@
+
+@section scripts {
+    @Scripts.Render("~/bundles/app")
 }
 
-<app-root></app-root>
+<div class="page-header">
+    <h1>CustomerService</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Books</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: customers">
+                    <li>
+                        <strong><span data-bind="text: customerName"></span></strong>: <span data-bind="text: customerNumber"></span>
+                        <!-- New code -->
+                        <small><a href="#" data-bind="click: $parent.getCustomer">Details</a></small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Add Book</h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: addCustomer">
+                   
+                    <div class="form-group" data-bind="with: newCustomer">
+
+                        <label for="inputTitle" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitle" data-bind="value:customerName" placeholder="name" />
+                        </div>
+
+                        <label for="inputYear" class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputYear" data-bind="value:customerAddress" placeholder="address" />
+                        </div>
+
+                        <label for="inputGenre" class="col-sm-2 control-label">Number</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputGenre" data-bind="value:customerNumber" placeholder="number" />
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    @*<app-root></app-root>*@
